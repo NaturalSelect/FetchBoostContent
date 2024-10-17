@@ -105,17 +105,17 @@ function(FetchBoostContent_Populate name)
     # directly by FetchBoostContent_Populate too.
     FetchContent_GetProperties(${name})
     if (NOT ${name}_POPULATED)
-        FetchContent_Populate(${name} ${ARGN})
+        FetchContent_MakeAvailable(${name} ${ARGN})
     endif()
 
-    # Set properties and return values based on FetchContent_Populate
+    # Set properties and return values based on FetchContent_MakeAvailable
     set(PROPERTY_SUFFIXES
             SOURCE_DIR sourceDir
             BINARY_DIR binaryDir
             POPULATED populated)
     while (PROPERTY_SUFFIXES)
         list(POP_FRONT PROPERTY_SUFFIXES PROPERTY SUFFIX)
-        # If FetchContent_Populate returned this property
+        # If FetchContent_MakeAvailable returned this property
         # Set the boost version of the property too
         if (${name}_${PROPERTY})
             set(propertyName "_FetchBoostContent_${name}_${SUFFIX}")
@@ -278,7 +278,7 @@ function(FetchBoostContent_Populate name)
                 # Populate if not populated
                 FetchContent_GetProperties(${module})
                 if (NOT ${module}_POPULATED)
-                    FetchContent_Populate(${module})
+                    FetchContent_MakeAvailable(${module})
                 endif ()
 
                 # Remember source dir
@@ -481,7 +481,7 @@ function(FetchBoostContent_Populate name)
         # Ensure library is populated
         FetchContent_GetProperties(${module})
         if (NOT ${module}_POPULATED)
-            FetchContent_Populate(${module})
+            FetchContent_MakeAvailable(${module})
             message(FATAL_ERROR "${module} has not been populated yet")
         endif ()
         if (NOT EXISTS ${${module}_SOURCE_DIR})
@@ -757,5 +757,3 @@ function(FetchBoostContent_MakeAvailable contentName)
         endwhile()
     endif ()
 endfunction()
-
-

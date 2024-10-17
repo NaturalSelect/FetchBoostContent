@@ -139,3 +139,22 @@ if (NOT boost_url_POPULATED)
 endif ()
 
 add_subdirectory(example)
+
+## Example
+
+# find_package(Boost COMPONENTS cobalt VERSION ${Boost_VERSION})
+
+# if(NOT Boost_FOUND)
+#     include(cmake/FetchBoostContent.cmake)
+
+#     FetchBoostContent_Declare(
+#             boost_cobalt
+#             GIT_REPOSITORY https://github.com/boostorg/cobalt
+#             GIT_TAG       boost-${Boost_VERSION}
+#     )
+#     FetchBoostContent_MakeAvailable(boost_cobalt)
+# endif()
+
+# target_link_libraries(workbook INTERFACE Boost::headers)
+
+# target_link_libraries(workbook PRIVATE Boost::cobalt)
